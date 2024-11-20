@@ -36,3 +36,4 @@ def disk_usage():
         return jsonify({"disk_usage_percent": usage_percent})
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+    
