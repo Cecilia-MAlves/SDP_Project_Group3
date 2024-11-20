@@ -35,10 +35,10 @@ def create_app(test_config=None):
                 <body>
                     <h1>Software Development Processes Project - Group 3</h1>
                     <h3>Students: Cecilia Machado Alves and Peter Bader</h3>
-                    <p>This project is part of the MIO program from FHTW. The 
-                    aim of this project is to practice the methods of current 
+                    <p>This project is part of the MIO program from FHTW. The
+                    aim of this project is to practice the methods of current
                     software development processes.</p>
-                    <p>Click on the links below to check the values for 
+                    <p>Click on the links below to check the values for
                     Temperature and Disk Usage</p>
                     <ul>
                         <li><a href="/cpu/temp">CPU Temperature</a></li>
@@ -47,7 +47,7 @@ def create_app(test_config=None):
                 </body>
             </html>
         '''
-    
+
     app.register_blueprint(bp)
 
     return app
