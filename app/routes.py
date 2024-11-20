@@ -8,6 +8,7 @@ bp = Blueprint('routes', __name__)
 
 # CPU temperature endpoint
 @bp.route('/cpu/temp', methods=['GET'])
+
 def cpu_temp():
     try:
         cpu = CPUTemperature()
@@ -18,6 +19,7 @@ def cpu_temp():
 
 # CPU temperature error-checking endpoint
 @bp.route('/cpu/temp/error', methods=['GET'])
+
 def cpu_temp_error():
     try:
         cpu = CPUTemperature()
@@ -29,6 +31,7 @@ def cpu_temp_error():
 
 # Disk usage endpoint
 @bp.route('/disk/usage', methods=['GET'])
+
 def disk_usage():
     try:
         total, used, free = shutil.disk_usage("/")
