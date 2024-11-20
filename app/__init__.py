@@ -26,7 +26,7 @@ def create_app(test_config=None):
 
     # Homepage
     @app.route('/home')
-    def hello():
+    def home_page():
         return '''
             <html>
                 <head>
@@ -35,9 +35,11 @@ def create_app(test_config=None):
                 <body>
                     <h1>Software Development Processes Project - Group 3</h1>
                     <h3>Students: Cecilia Machado Alves and Peter Bader</h3>
-                    <p>This project is part of the MIO program from FHTW. The aim of this project 
-                    is to practice the methods of current software development processes.</p>
-                    <p>Click on the links below to check the values for Temperature and Disk Usage</p>
+                    <p>This project is part of the MIO program from FHTW. The 
+                    aim of this project is to practice the methods of current 
+                    software development processes.</p>
+                    <p>Click on the links below to check the values for 
+                    Temperature and Disk Usage</p>
                     <ul>
                         <li><a href="/cpu/temp">CPU Temperature</a></li>
                         <li><a href="/disk/usage">Disk Usage</a></li>
@@ -46,10 +48,6 @@ def create_app(test_config=None):
             </html>
         '''
     
-    #from . import auth
     app.register_blueprint(bp)
-
-    from . import db
-    db.init_app(app)
 
     return app

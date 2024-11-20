@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify
 from gpiozero import CPUTemperature
 import shutil
-import psutil
+
 
 # Create a Blueprint for routes
 bp = Blueprint('routes', __name__)
