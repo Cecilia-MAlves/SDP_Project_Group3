@@ -1,4 +1,4 @@
-name: Python Flask Continuous Integration
+name: Python Flask Continuous Integration - Linting and Docker Iamge Build
 
 on:
   pull_request:
@@ -8,7 +8,7 @@ on:
 
 jobs:
   linting:
-    runs-on: ubuntu-latest
+    runs-on: debian-latest
 
     steps: 
       - uses: actions/checkout@v4
@@ -22,7 +22,7 @@ jobs:
   image:
     needs: linting
 
-    runs-on: ubuntu-latest
+    runs-on: debian-latest
 
     steps: 
     - uses: actions/checkout@v4
