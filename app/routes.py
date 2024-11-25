@@ -6,6 +6,7 @@ import shutil
 # Create a Blueprint for routes
 bp = Blueprint('routes', __name__)
 
+
 # CPU temperature endpoint
 @bp.route('/cpu/temp', methods=['GET'])
 def cpu_temp():
@@ -15,6 +16,7 @@ def cpu_temp():
         return jsonify({"temp": temperature})
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
 
 # CPU temperature error-checking endpoint
 @bp.route('/cpu/temp/error', methods=['GET'])
@@ -27,6 +29,7 @@ def cpu_temp_error():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+
 # Disk usage endpoint
 @bp.route('/disk/usage', methods=['GET'])
 def disk_usage():
@@ -36,4 +39,3 @@ def disk_usage():
         return jsonify({"disk_usage_percent": usage_percent})
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-    
