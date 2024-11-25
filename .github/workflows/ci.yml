@@ -43,4 +43,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: ghcr.io/${{ github.repository_owner }}/peter-cecilia-sw-dev:latest
+          tags: ghcr.io/cecilia-malves/peter-cecilia-sw-dev:latest
