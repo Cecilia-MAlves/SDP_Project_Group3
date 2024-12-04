@@ -1,4 +1,4 @@
-name: Python Flask Continuous Integration - Linting and Docker Iamge Build
+name: Python Flask Continuous Integration - Linting, Testing and Docker Image Build
 
 on:
   pull_request:
