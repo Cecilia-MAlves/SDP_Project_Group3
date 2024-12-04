@@ -24,9 +24,29 @@ jobs:
       - name: Linting
         run: flake8 app/
 
-  image:
+  testing:
     needs: linting
     runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install app requirements
+      run: pip install -r requirements.txt
+
+    - name: Install testing tool
+      run: pip install pytest
+
+    - name: Install Mock
+      run: pip install pytest-mock
+
+    - name: Run test
+      run: python -m pytest
+
+  image:
+    needs: testing
+    runs-on: ubuntu-latest
+    
     steps: 
       - uses: actions/checkout@v4
 

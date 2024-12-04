@@ -1,5 +1,3 @@
-from app import create_app
-
 def test_cpu_temp(mocker, client):
     # Mock the CPUTemperature class
     mock_cpu = mocker.patch('app.routes.CPUTemperature')
