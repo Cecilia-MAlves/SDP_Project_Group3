@@ -3,7 +3,7 @@ from gpiozero import CPUTemperature
 import shutil
 
 
-# Create a Blueprint for routes
+# Create a Blueprint for routes 
 bp = Blueprint('routes', __name__)
 
 
