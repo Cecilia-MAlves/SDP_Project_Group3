@@ -25,7 +25,7 @@ def cpu_temp():
     if temp is None:
         return jsonify({"error": "Temperature sensor not found"}), 500
     elif isinstance(temp, str):
-        return jsonify({"error": temp}), 500
+        return jsonify({"error": temp})
     else:
         return jsonify({"temp": temp})
 
