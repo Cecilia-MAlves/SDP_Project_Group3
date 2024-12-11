@@ -5,7 +5,7 @@ def test_cpu_temp(mocker, client):
 
     response = client.get('/cpu/temp')  # Ensure the route matches your app
     assert response.status_code == 200
-    assert response.json == {"Temperature (°C)": 45.0}
+    assert response.json == {"Temperature (C)": 45.0}
 
 
 def test_disk_usage(mocker, client):
