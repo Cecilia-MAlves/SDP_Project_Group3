@@ -8,7 +8,7 @@ bp = Blueprint('routes', __name__)
 
 def read_cpu_temperature():
     try:
-        with open("/sys/class/thermal/thermal_zone0/temp", "r") as temp_file:
+        with open("/sys/class/thermal/thermal_zone1/temp", "r") as temp_file:
             temp = int(temp_file.read().strip()) / 1000.0
         return temp
     except FileNotFoundError:
@@ -24,9 +24,9 @@ def cpu_temp():
     if temp is None:
         return jsonify({"error": "Temperature sensor not found"}), 500
     elif isinstance(temp, str):
-        return jsonify({"error": temp})
+        return jsonify({"error": temp}), 500
     else:
-        return jsonify({"temp": temp})
+        return jsonify({"Temperature (°C)": temp})
 
 
 # Disk usage endpoint
@@ -35,6 +35,6 @@ def disk_usage():
     try:
         total, used, free = shutil.disk_usage("/")
         usage_percent = (used / total) * 100
-        return jsonify({"disk_usage_percent": usage_percent})
+        return jsonify({"Disk Usage (%)": usage_percent})
     except Exception as e:
         return jsonify({"error": str(e)}), 500
