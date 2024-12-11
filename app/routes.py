@@ -26,7 +26,7 @@ def cpu_temp():
     elif isinstance(temp, str):
         return jsonify({"error": temp}), 500
     else:
-        return jsonify({"Temperature (°C)": temp})
+        return jsonify({"Temperature (C)": temp})
 
 
 # Disk usage endpoint
