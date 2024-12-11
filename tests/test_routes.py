@@ -1,7 +1,7 @@
 def test_cpu_temp(mocker, client):
     # Mock the CPUTemperature class
     mock_cpu = mocker.patch('app.routes.read_cpu_temperature')
-    mock_cpu.return_value.temperature = 45.0
+    mock_cpu.return_value = 45.0
 
     response = client.get('/cpu/temp')  # Ensure the route matches your app
     assert response.status_code == 200
