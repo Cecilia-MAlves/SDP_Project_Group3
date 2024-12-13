@@ -10,7 +10,7 @@ def test_cpu_temp(mocker, client):
 
 def test_disk_usage(mocker, client):
     # Mock the shutil.disk_usage function
-    mock_disk = mocker.patch('app.routes.shutil.disk_usage')
+    mock_disk = mocker.patch('app.routes.disk_usage')
     mock_disk.return_value = (100, 50, 50)  # Total, used, free
 
     response = client.get('/disk/usage')  # Ensure the route matches your app
