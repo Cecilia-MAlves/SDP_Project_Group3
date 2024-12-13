@@ -29,6 +29,17 @@ def cpu_temp():
         return jsonify({"Temperature (C)": temp})
 
 
+# CPU temperature error-checking endpoint
+@bp.route('/cpu/temp/error', methods=['GET'])
+def cpu_temp_error():
+    try:
+        temperature = read_cpu_temperature()
+        status = "too hot" if temperature > 60 else "fine"
+        return jsonify({"status": status, "temp": temperature})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
 # Disk usage endpoint
 @bp.route('/disk/usage', methods=['GET'])
 def disk_usage():
