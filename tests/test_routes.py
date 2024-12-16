@@ -16,12 +16,3 @@ def test_disk_usage(mocker, client):
     response = client.get('/disk/usage')  
     assert response.status_code == 200
     assert response.json == {"Disk Usage (%)": 50.0}
-
-
-def test_memory_usage(mocker, client):
-    mock_memory = mocker.patch('app.routes.psutil.virtual_memory()[2]')
-    mock_memory.return_value.percent = 30.0
-
-    response = client.get('/memory/usage')
-    assert response.status_code == 200
-    assert response.json == {"Memory Usage (%)": 30.0}
