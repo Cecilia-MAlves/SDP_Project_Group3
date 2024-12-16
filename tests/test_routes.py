@@ -3,7 +3,7 @@ def test_cpu_temp(mocker, client):
     mock_cpu = mocker.patch('app.routes.read_cpu_temperature')
     mock_cpu.return_value = 45.0
 
-    response = client.get('/cpu/temp')  # Ensure the route matches your app
+    response = client.get('/cpu/temp') 
     assert response.status_code == 200
     assert response.json == {"Temperature (C)": 45.0}
 
@@ -13,14 +13,13 @@ def test_disk_usage(mocker, client):
     mock_disk = mocker.patch('app.routes.shutil.disk_usage')
     mock_disk.return_value = (100, 50, 50)  # Total, used, free
 
-    response = client.get('/disk/usage')  # Ensure the route matches your app
+    response = client.get('/disk/usage')  
     assert response.status_code == 200
     assert response.json == {"Disk Usage (%)": 50.0}
 
 
 def test_memory_usage(mocker, client):
-    # If routes.py does: from psutil import virtual_memory
-    mock_memory = mocker.patch('app.routes.virtual_memory')
+    mock_memory = mocker.patch('app.routes.shutil.memory')
     mock_memory.return_value.percent = 30.0
 
     response = client.get('/memory/usage')
