@@ -29,6 +29,7 @@ def test_cpu_temp_status_hot(mocker, client):
     assert response.json == {"Temperature (C)": 65.0}
     assert response.json == {"Status": "too hot"}
 
+
 def test_disk_usage(mocker, client):
     # Mock the shutil.disk_usage function
     mock_disk = mocker.patch('app.routes.shutil.disk_usage')
