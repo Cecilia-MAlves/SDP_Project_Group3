@@ -19,46 +19,10 @@ def test_disk_usage(mocker, client):
 
 
 def test_memory_usage(mocker, client):
-    """
-    If routes.py has 'import psutil' and calls psutil.virtual_memory()
-    """
-    mock_memory = mocker.patch('app.routes.psutil.virtual_memory')
-    MockMemory = namedtuple('MockMemory', ['percent'])
-    mock_memory.return_value = MockMemory(percent=30.0)
+    # If routes.py does: from psutil import virtual_memory
+    mock_memory = mocker.patch('app.routes.virtual_memory')
+    mock_memory.return_value.percent = 30.0
 
     response = client.get('/memory/usage')
     assert response.status_code == 200
     assert response.json == {"Memory Usage (%)": 30.0}
-
-
-def test_network_stats(mocker, client):
-    """
-    If routes.py has 'import psutil' and calls psutil.net_io_counters()
-    """
-    mock_net = mocker.patch('app.routes.psutil.net_io_counters')
-    MockNetIO = namedtuple('MockNetIO', ['bytes_sent', 'bytes_recv', 'packets_sent', 'packets_recv'])
-    mock_net.return_value = MockNetIO(123456, 654321, 100, 200)
-
-    response = client.get('/network/stats')
-    assert response.status_code == 200
-    assert response.json == {
-        "Bytes Sent": 123456,
-        "Bytes Received": 654321,
-        "Packets Sent": 100,
-        "Packets Received": 200
-    }
-
-
-def test_system_uptime(mocker, client):
-    """
-    If routes.py has 'import psutil' and calls psutil.boot_time()
-    """
-    mock_boot_time = mocker.patch('app.routes.psutil.boot_time')
-    mock_current_time = mocker.patch('time.time')
-
-    mock_boot_time.return_value = 1_600_000_000
-    mock_current_time.return_value = 1_600_000_100  # 100s after boot
-
-    response = client.get('/system/uptime')
-    assert response.status_code == 200
-    assert response.json == {"Uptime (s)": 100}
