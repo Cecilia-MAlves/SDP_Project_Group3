@@ -15,8 +15,7 @@ def test_cpu_temp_status_fine(mocker, client):
 
     response = client.get('/cpu/temp/error') 
     assert response.status_code == 200
-    assert response.json == {"Temperature (C)": 45.0}
-    assert response.json == {"Status": "fine"}
+    assert response.json == {"Status": "fine", "Temperature (C)": 45.0}
 
 
 def test_cpu_temp_status_hot(mocker, client):
@@ -26,8 +25,7 @@ def test_cpu_temp_status_hot(mocker, client):
 
     response = client.get('/cpu/temp/error') 
     assert response.status_code == 200
-    assert response.json == {"Temperature (C)": 65.0}
-    assert response.json == {"Status": "too hot"}
+    assert response.json == {"Status": "too hot", "Temperature (C)": 65.0}
 
 
 def test_disk_usage(mocker, client):
