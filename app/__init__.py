@@ -42,6 +42,8 @@ def create_app(test_config=None):
                     Temperature and Disk Usage</p>
                     <ul>
                         <li><a href="/cpu/temp">CPU Temperature</a></li>
+                        <li><a href="/cpu/temp/error">CPU Temperature
+                        Status</a></li>
                         <li><a href="/disk/usage">Disk Usage</a></li>
                     </ul>
                 </body>
