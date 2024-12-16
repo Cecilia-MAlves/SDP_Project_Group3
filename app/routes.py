@@ -35,7 +35,7 @@ def cpu_temp_error():
     try:
         temperature = read_cpu_temperature()
         status = "too hot" if temperature > 60 else "fine"
-        return jsonify({"status": status, "temp": temperature})
+        return jsonify({"Status": status, "Temperature (C)": temperature})
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
