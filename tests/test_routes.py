@@ -17,31 +17,30 @@ def test_disk_usage(mocker, client):
     assert response.status_code == 200
     assert response.json == {"Disk Usage (%)": 50.0}
 
+
 def test_memory_usage(mocker, client):
+    """
+    If routes.py has 'import psutil' and calls psutil.virtual_memory()
+    """
     mock_memory = mocker.patch('app.routes.psutil.virtual_memory')
     MockMemory = namedtuple('MockMemory', ['percent'])
     mock_memory.return_value = MockMemory(percent=30.0)
 
-    response = client.get('/memory/usage')  # Adjust route as needed
+    response = client.get('/memory/usage')
     assert response.status_code == 200
     assert response.json == {"Memory Usage (%)": 30.0}
 
 
 def test_network_stats(mocker, client):
+    """
+    If routes.py has 'import psutil' and calls psutil.net_io_counters()
+    """
     mock_net = mocker.patch('app.routes.psutil.net_io_counters')
-
     MockNetIO = namedtuple('MockNetIO', ['bytes_sent', 'bytes_recv', 'packets_sent', 'packets_recv'])
-    mock_net.return_value = MockNetIO(
-        bytes_sent=123456,
-        bytes_recv=654321,
-        packets_sent=100,
-        packets_recv=200
-    )
+    mock_net.return_value = MockNetIO(123456, 654321, 100, 200)
 
-    response = client.get('/network/stats')  # Adjust route as needed
+    response = client.get('/network/stats')
     assert response.status_code == 200
-    # Adapt the assertion to match whatever JSON your endpoint returns
-    # For instance, if your route returns a dict with bytes and packets:
     assert response.json == {
         "Bytes Sent": 123456,
         "Bytes Received": 654321,
@@ -51,14 +50,15 @@ def test_network_stats(mocker, client):
 
 
 def test_system_uptime(mocker, client):
+    """
+    If routes.py has 'import psutil' and calls psutil.boot_time()
+    """
     mock_boot_time = mocker.patch('app.routes.psutil.boot_time')
     mock_current_time = mocker.patch('time.time')
 
-    # Let's say your route calculates uptime as time.time() - psutil.boot_time().
-    mock_boot_time.return_value = 1_600_000_000  # Example boot epoch
-    mock_current_time.return_value = 1_600_000_100  # 100 seconds after boot
+    mock_boot_time.return_value = 1_600_000_000
+    mock_current_time.return_value = 1_600_000_100  # 100s after boot
 
-    response = client.get('/system/uptime')  # Adjust route as needed
+    response = client.get('/system/uptime')
     assert response.status_code == 200
-    # Expecting the route to return 100 seconds of uptime (or however it's formatted)
     assert response.json == {"Uptime (s)": 100}
